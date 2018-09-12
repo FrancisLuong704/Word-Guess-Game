@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/css/style.css">
-    <title>WORD GUESS GAME</title>
+    <title>HANGMAN</title>
 </head>
 <body>
-    <!-- all the texts -->
-    <h1>GUESS THE VIDEO GAME CHARACTER</h1>
+    <header>
+            <h1>HANGMAN GAME</h1>
+            <br>
+            <h2>Games</h2>
+    </header>
+    <br>
 
-    <div>
-        <p id="directions-text">Press any key to start playing!</p>
-        <p id="wins-text"></p>
-        <p id="guesses-left"></p>
-        <p id="guess"></p>
-        <p id="current-word"></p>
-        <p id="loss-text"></p>
-    </div>
+    <div class="underscore">_ _ _ _ _ </div>
+    <br>
+    <div class="correctGuess"><h3>Correct Guess: </h3></div>
+    <br>
+    <div class="wrongGuess"><h3>Wrong Guess: </h3></div>
+    <br>
+    <div class="guessesLeft"><h2>Guesses Left: <span id="guessesLeftText"></span> </h2> </div>
+    <br>
+    <div class="wins"><h3>Wins: </h3></div>
+    <br>
+    <div class="loss"><h3>Loss: </h3></div>
 
-    <script type="text/javascript" src="assets/javascript/game.js"></script>
+    <script src="assets/javascript/game.js"></script>
 </body>
-
 </html>

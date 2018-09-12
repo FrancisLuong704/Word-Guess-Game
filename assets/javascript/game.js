@@ -1,55 +1,50 @@
+//possible word choices
+var gameWords = ["mario", "link", "samus", "fox", "kirby"]
 
-// array for possible guesses
-var gameWords = ["link", "samus", "mario", "fox", "kirby", "akuma", "sonic", "snake", "cammy", "ryu", "falco", "ken"]
-
-//grabbing IDs from html
-var directionsText = document.getElementById("directions-text");
-var winsText = document.getElementById("wins-text");
-var lossText = document.getElementById("loss-text");
-var guessesLeftText = document.getElementById("guesses-left");
-var guessText = document.getElementById("guess");
-var currentWordText = document.getElementById("current-word");
-
-//var for the guesses?
+//vars for guesses and whatnot
 var guessesLeft = 9;
-var userGuess = [];
+var wrongGuess = [];
+var blanks = [];
 var wins = 0;
 var loss = 0;
-//var for the blanks above that arent filled in yet( idk if i should have it as gameWords.length or letters.length)
-var blanks = gameWords.length
 
-//where all the fun begins. heres a while loop that makes it so the game goes on till the requirements are set.
-// i learned this in codeacademy like half a year ago. is this right? ish? i guess i'll figure that out later. 
-while (blanks > 0) {
-    //this makes it type
-    document.onkeyup = function(event) {
-        var userGuess = event.key;
-        //this makes it all lowercase i think 
-        userGuess = userGuess.valueOf().toLowerCase();
-        //generates a random word from the array of characters
-        var randomWord = function() {
-            gameWords[Math.floor(Math.random() * gameWords.length)];
+//grabbing classes from HTML
+var underScoreText = document.getElementsByClassName("underscore");
+var correctGuessText = document.getElementsByClassName("correctGuess");
+var wrongGuessText = document.getElementsByClassName("wrongGuess");
+var guessesLeftText = document.getElementsByClassName("guessesLeft");
+var winsText = document.getElementsByClassName("wins");
+var lossText = document.getElementsByClassName("loss");
+
+//chooses a word from the list at random
+var currentWord = gameWords[Math.floor(Math.random() * gameWords.length)];
+
+console.log(currentWord);
+//makes blanks for each index of the chosen word
+function makeBlanks() {
+    for (var i = 0; i < currentWord.length; i++) {
+        blanks.push("_"); //pushes a underscore for each index of the current word
+        underScoreText[0].innerText = blanks.join(" "); // for each time the for loop runs it adds a space inbetween each underscore
+    }
+    console.log(blanks)
+    return blanks;
+}
+makeBlanks();
+
+document.onkeyup = function (event) {
+    //puts user guess to each key you press
+    var userGuess = event.key;
+    console.log(userGuess);
+    //replaces the blanks with whatever you type if it matches the letter of index of chosen word
+    for (var i = 0; i < currentWord.length; i++) {
+        if (currentWord[i] === userGuess) {
+            blanks[i] = userGuess;
+            underScoreText[0].innerText = blanks.join(" ");
+        } else { //if its wrong then it adds to wrong letters array and displays it. also subtracts from guesses left 
+            guessesLeft--;
+            guessesLeftText.textContent = "Guesses Left: " + guessesLeft;
+
         }
-        //what the user guesses. 
-        for (var g = 0; g < gameWords.length; g++) {
-            blanks[g] = "_";    //this part makes the hangman portion.
-            if (gameWords[g] === userGuess) {
-                $(blanks[g]).append(userGuess);
-                blank--;
-            } else {
-                guessesLeft--;
-                guessesLeftText.textContent = guessesLeft;
-            } 
-            if (blank === 0) {
-                currentWordText.textContent = "Nice! the word was" + gameWords;
-                //this line below calls on random function for a new word
-                currentWordText.textContent = randomWord();
-            } 
-            if (guessesLeft === 0); {
-                 loss++;
-                 lossText.textContent = "Losses: " + loss;
-            }
-        }
-            
     }
 }
+
